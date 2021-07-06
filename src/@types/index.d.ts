@@ -4,6 +4,7 @@ declare global {
         interface Request {
             userId? : Record<string,any>
             username? : Record<string,any>
+            isAdmin? : Record<boolean,any>
         }
     }
 }

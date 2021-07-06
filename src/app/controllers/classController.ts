@@ -41,7 +41,7 @@ class classController {
     }
   }
 
-  async put (req: Request, res: Response) {
+  async patch (req: Request, res: Response) {
     const { classId } = req.params
     const { title, link, classDate } = req.body
 

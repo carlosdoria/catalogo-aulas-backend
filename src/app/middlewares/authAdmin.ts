@@ -25,9 +25,10 @@ export default async function (req: Request, res: Response, next: NextFunction) 
       return res.status(400).json({ message: 'Token inválido' })
     }
 
-    req.userId = decoded.id
-    req.username = decoded.username
-    req.isAdmin = decoded.isAdmin
+
+    if(!decoded.isAdmin) {
+      return res.status(400).json({ message: 'É necessário ser administrador' })
+    }
 
     return next()
   })

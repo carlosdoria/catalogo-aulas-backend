@@ -39,7 +39,7 @@ class moduleController {
     }
   }
 
-  async put (req: Request, res: Response) {
+  async patch (req: Request, res: Response) {
     const { moduleId } = req.params
     const { title } = req.body
 

@@ -7,7 +7,7 @@ interface IUser {
   username: string
   name: string
   password: string
-  isAdm: boolean
+  isAdmin: boolean
   createdAt: string
 }
 
@@ -27,7 +27,7 @@ const UserSchema = new Schema<IUser>({
     required: true,
     select: false
   },
-  isAdm:  {
+  isAdmin:  {
     type: Boolean,
     required: true,
     default: false

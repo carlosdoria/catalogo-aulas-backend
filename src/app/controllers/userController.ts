@@ -28,7 +28,7 @@ class UserController {
 
       return res.status(200).json({
         newUser,
-        token: generateToken( newUser._id, newUser.username )
+        token: generateToken( newUser._id, newUser.username, false )
       })
 
     } catch (error) {
@@ -43,22 +43,26 @@ class UserController {
       return res.status(400).json({ message: 'Um campo obrigatório não foi informado.' })
     }
 
-    const user = (await UserModel.findOne({ username: username }, ['username', 'password']))
+    try {
+      const user = await UserModel.findOne({ username: username }, ['username', 'password', 'isAdmin'])
 
-    if (!user){
-      return res.status(400).json({ message: 'Usuário não encontrado.' })
+      if (!user){
+        return res.status(400).json({ message: 'Usuário não encontrado.' })
+      }
+
+      if (!await bcrypt.compare(password, user.password)) {
+        return res.status(400).json({ message: 'Senha inválida.' })
+      }
+
+      user.password = undefined
+
+      return res.status(200).json({
+        user,
+        token: generateToken( user._id, user.username, user.isAdmin )
+      })
+    } catch (error) {
+      return res.status(400).json({ error })
     }
-
-    if (!await bcrypt.compare(password, user.password)) {
-      return res.status(400).json({ message: 'Senha inválida.' })
-    }
-
-    user.password = undefined
-
-    return res.status(200).json({
-      user,
-      token: generateToken( user._id, user.username )
-    })
   }
 
   async list (req: Request, res: Response) {
@@ -84,7 +88,7 @@ class UserController {
     }
   }
 
-  async put (req: Request, res: Response) {
+  async patch (req: Request, res: Response) {
     const { userId } = req.params
     const { username, name, password } = req.body
 
@@ -100,6 +104,28 @@ class UserController {
           username: !username ? user.username : username,
           name: !name ? user.name : name,
           password: !password ? user.password : password,
+        }
+      )
+
+      return res.status(200).json({ message: 'Usuário atualizado com sucesso' })
+    } catch (error){
+      return res.status(400).json({ error })
+    }
+  }
+
+  async patchAdmin (req: Request, res: Response) {
+    const { userId } = req.params
+
+    try {
+        const user = await UserModel.findById(userId)
+
+        if(!user) {
+          return res.status(404).json({ message: 'Usuário não localizada.' })
+        }
+
+      await user.updateOne(
+        {
+          isAdmin: true
         }
       )
 
