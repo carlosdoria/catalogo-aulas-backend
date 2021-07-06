@@ -19,7 +19,7 @@ class moduleController {
         user: req.userId
       })
 
-      return res.status(200).json({
+      return res.status(201).json({
         newmodule,
       })
 

@@ -14,10 +14,5 @@ userRoutes.post('/authenticate', userController.authenticate)
 userRoutes.patch('/patch/:userId', userController.patch)
 userRoutes.delete('/delete/:userId', userController.delete)
 
-userRoutes.use(authMiddleware)
-
-// Rota criando somente para tornar um usuário administrado
-userRoutes.patch('/admin/patch/:userId', userController.patchAdmin)
-
 export { userRoutes }
 

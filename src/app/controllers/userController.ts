@@ -26,7 +26,7 @@ class UserController {
       // tornando o password undefined para que não apareça no retorno do newUser
       newUser.password = undefined
 
-      return res.status(200).json({
+      return res.status(201).json({
         newUser,
         token: generateToken( newUser._id, newUser.username, false )
       })
@@ -104,28 +104,6 @@ class UserController {
           username: !username ? user.username : username,
           name: !name ? user.name : name,
           password: !password ? user.password : password,
-        }
-      )
-
-      return res.status(200).json({ message: 'Usuário atualizado com sucesso' })
-    } catch (error){
-      return res.status(400).json({ error })
-    }
-  }
-
-  async patchAdmin (req: Request, res: Response) {
-    const { userId } = req.params
-
-    try {
-        const user = await UserModel.findById(userId)
-
-        if(!user) {
-          return res.status(404).json({ message: 'Usuário não localizada.' })
-        }
-
-      await user.updateOne(
-        {
-          isAdmin: true
         }
       )
 
