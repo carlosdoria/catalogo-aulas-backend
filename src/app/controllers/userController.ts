@@ -89,11 +89,17 @@ class UserController {
     const { username, name, password } = req.body
 
     try {
-      await UserModel.findByIdAndUpdate( userId,
+        const user = await UserModel.findById(userId)
+
+        if(!user) {
+          return res.status(404).json({ message: 'Usuário não localizada.' })
+        }
+
+      await user.updateOne(
         {
-          username,
-          name,
-          password
+          username: !username ? user.username : username,
+          name: !name ? user.name : name,
+          password: !password ? user.password : password,
         }
       )
 
