@@ -1,9 +1,9 @@
-<h1 align='center'><strong>Personal Link Manager</strong></h1>
+<h1 align='center'><strong>Catálogo de aulas - Backend</strong></h1>
 
 ## Index
 
 - [About the project](#about-the-project)
-- [Deploy](#deploy)
+<!-- - [Deploy](#deploy) -->
 - [Technologies and tools used](#technologies-and-tools-used)
 - [Starting the project](#starting-the-project)
 
@@ -20,12 +20,12 @@
 Simple landing page for managing the dissemination of social media links. <br>
 The project has integration with the Api of [Github](https://github.com/) and [Prismic](https://prismic.io/) to render user data.
 
-<br>
+<!-- <br>
 
 ## Deploy
 
 Deploy link:
-[Deploy](https://carlosdoria-portifolio.vercel.app/)
+[Deploy](https://carlosdoria-portifolio.vercel.app/) -->
 
 <br>
 
@@ -33,12 +33,13 @@ Deploy link:
 
 The project was developed with the following technologies and tools:
 
-- [NextJS](https://nextjs.org/);
+- [Express](https://expressjs.com/);
 - [TypeScript](https://www.typescriptlang.org/);
-- [Styled Components](https://styled-components.com/);
-<!--- [Prismic](https://prismic.io/);
-- [Jest](https://jestjs.io/);
-- [React Testing Library](https://testing-library.com/);-->
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js);
+- [jsonwebtoken](https://jwt.io/);
+- [mongodb](https://github.com/mongodb/node-mongodb-native);
+- [mongoose](https://mongoosejs.com/);
+
 
 <br>
 
@@ -47,19 +48,27 @@ The project was developed with the following technologies and tools:
 In your terminal, clone this repository:
 
 ```
-git clone https://github.com/carlosdoria/social-links.git
+git clone https://github.com/carlosdoria/catalogo-aulas-backend.git
 ```
 
 Then enter the directory:
 
 ```
-cd social-links
+cd catalogo-aulas-backend
 ```
 
 And run the following command to install the necessary dependencies:
 
 ```
 yarn
+```
+
+Before running the project it is necessary to inform the verifiable environment for that create a '.env' file with the following variables:
+
+```
+PORT=
+SECRET_TOKEN =
+MONGODB_CONNECTION=
 ```
 
 To run the development server:
