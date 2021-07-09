@@ -5,7 +5,7 @@ class classController {
   async create (req: Request, res: Response) {
     const { module, title, link, classDate } = req.body
 
-    if(!module || !title || !link) {
+    if(!module || !title || !link || !classDate) {
       return res.status(400).json({ message: 'Um campo obrigatório não foi informado.' })
     }
 
@@ -30,11 +30,26 @@ class classController {
     }
   }
 
-  async list (req: Request, res: Response) {
+  async listAll (req: Request, res: Response) {
     try {
-      const allClasses = await ClassModel.find().populate('module')
+      const allClasses = await ClassModel.find().populate('module').sort('title')
 
-      return res.status(200).json({ allClasses })
+      return res.status(200).json( allClasses )
+
+    } catch (error){
+      return res.status(400).json({ error })
+    }
+  }
+
+  async list (req: Request, res: Response) {
+    const { id } =req.params
+
+    try {
+      const allClasses = await ClassModel.find({
+        module: { _id: id }
+      }).populate('module').sort('title')
+
+      return res.status(200).json( allClasses )
 
     } catch (error){
       return res.status(400).json({ error })

@@ -8,9 +8,9 @@ import { classRoutes } from './class.routes'
 
 const routes = Router()
 
-routes.use('/user', userRoutes)
-routes.use('/module', moduleRoutes)
-routes.use('/class', classRoutes)
+routes.use('/users', userRoutes)
+routes.use('/modules', moduleRoutes)
+routes.use('/lessons', classRoutes)
 
 routes.use(authAdminMiddleware)
 routes.get('/admin/test', (req, res) => res.status(400).json({

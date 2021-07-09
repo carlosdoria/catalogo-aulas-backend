@@ -2,9 +2,11 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-interface IClass {
+export interface IClass {
   title: string
-  module: string
+  module: {
+    _id: string
+  }
   link: string
   classDate: string
   createdAt: string

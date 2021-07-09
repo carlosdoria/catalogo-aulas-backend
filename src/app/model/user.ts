@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 
 const { Schema, model } = mongoose;
 
-interface IUser {
+export interface IUser {
   username: string
   name: string
   password: string

@@ -6,12 +6,12 @@ import authAdminMiddleware from '../app/middlewares/auth'
 
 const moduleRoutes = Router()
 
-moduleRoutes.get('/list', moduleController.list)
+moduleRoutes.get('/list', moduleController.listAll)
 
 moduleRoutes.use(authAdminMiddleware)
 
-moduleRoutes.post('/create', moduleController.create)
-moduleRoutes.patch('/patch/:moduleId', moduleController.patch)
-moduleRoutes.delete('/delete/:moduleId', moduleController.delete)
+moduleRoutes.post('/', moduleController.create)
+moduleRoutes.patch('/:moduleId', moduleController.patch)
+moduleRoutes.delete('/:moduleId', moduleController.delete)
 
 export { moduleRoutes }

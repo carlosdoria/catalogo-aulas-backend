@@ -2,14 +2,18 @@ import { Request, Response} from 'express'
 import bcrypt from 'bcryptjs'
 import { UserModel } from '../model/user'
 import { generateToken } from '../../utils/generateToken'
-
+import jwt from 'jsonwebtoken'
 
 class UserController {
   async create (req: Request, res: Response) {
-    const { username, name, password } = req.body
+    const { username, name, password, confirmPassword } = req.body
 
-    if(!username || !name || !password) {
+    if(!username || !name || !password || !confirmPassword) {
       return res.status(400).json({ message: 'Um campo obrigatório não foi informado.' })
+    }
+
+    if(password !== confirmPassword) {
+      return res.status(400).json({ message: 'As senhas informadas não são iguais.' })
     }
 
     try {
@@ -44,7 +48,7 @@ class UserController {
     }
 
     try {
-      const user = await UserModel.findOne({ username: username }, ['username', 'password', 'isAdmin'])
+      const user = await UserModel.findOne({ username }, ['username', 'password', 'isAdmin'])
 
       if (!user){
         return res.status(400).json({ message: 'Usuário não encontrado.' })
@@ -74,6 +78,13 @@ class UserController {
     } catch (error){
       return res.status(400).json({ error })
     }
+  }
+
+  async test (req: Request, res: Response) {
+    const usertoken = req.isAdmin;
+    // const token = usertoken.split(' ');
+    // const decoded = jwt.verify(token[1], process.env.SECRET_TOKEN);
+    console.log(usertoken);
   }
 
   async show (req: Request, res: Response) {

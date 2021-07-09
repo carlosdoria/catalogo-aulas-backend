@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
 
-interface IModule {
+export interface IModule {
+  _id: string
   title: string
   createdAt: string
 }

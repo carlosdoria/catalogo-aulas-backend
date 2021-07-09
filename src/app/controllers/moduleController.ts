@@ -28,11 +28,11 @@ class moduleController {
     }
   }
 
-  async list (req: Request, res: Response) {
+  async listAll (req: Request, res: Response) {
     try {
-      const allModules = await ModuleModel.find()
+      const allModules = await ModuleModel.find().sort('title')
 
-      return res.status(200).json({ allModules })
+      return res.status(200).json( allModules )
 
     } catch (error){
       return res.status(400).json({ error })
