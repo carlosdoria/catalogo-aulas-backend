@@ -9,16 +9,16 @@
 
 <br>
 
-![GitHub](https://img.shields.io/github/license/carlosdoria/social-links)
+<!-- ![GitHub](https://img.shields.io/github/license/carlosdoria/social-links)
 ![GitHub](https://img.shields.io/github/languages/count/carlosdoria/social-links)
 <br>
-
+ -->
 <!-- ![Print da Home Page](https://github.com/carlosdoria/clone-pipefy/blob/main/public/images/Home-page.png) -->
 
 ## 📝 About the project
 
 Simple landing page for managing the dissemination of social media links. <br>
-The project has integration with the Api of [Github](https://github.com/) and [Prismic](https://prismic.io/) to render user data.
+<!-- The project has integration with the Api of [Github](https://github.com/) and [Prismic](https://prismic.io/) to render user data. -->
 
 <!-- <br>
 
